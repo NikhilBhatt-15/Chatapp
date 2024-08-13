@@ -17,7 +17,7 @@ export const Link = styled(LinkComponent)`
     color:black;
     // padding:1rem;
     &:hover {
-        background-color:red;
+        background-color:rgba(0,0,0,0.1);
     }
 `;
 

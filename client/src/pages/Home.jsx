@@ -10,5 +10,5 @@ const Home = ()=>{
         </>
     )
 }
-
-export default AppLayout()(Home);
+ const HomeWithLayout = AppLayout()(Home);
+export default HomeWithLayout;

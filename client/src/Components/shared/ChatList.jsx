@@ -1,15 +1,18 @@
-import React from "react";
 import { Stack } from "@mui/material";
 import ChatItem from "./ChatItem";
- const ChatList = ({width= "100%",chats= [],chatId,onlineUsers=[],newMessagesAlert=[{
-    chatId:"",
-    count:4
-}],handleDeleteChat})=>{
+ const ChatList = ({width= "100%",chats= [],chatId,onlineUsers=[],newMessagesAlert,handleDeleteChat})=>{
 
     return <Stack width={width} >
         {
             chats.map((data,index)=>{
-                return(<ChatItem  name={data.name} key={data.chatId} chatId={data.chatId} sameSender={true} isOnline={true} newMessage={" vks vkk e"} />)
+                const {avatar,name,_Id,groupChat,members} = data;
+
+                const newMessageAlert = newMessagesAlert.find(({chatId})=>chatId == _Id);
+
+
+                // check if any of the members is online
+                const isOnline = members.some((member)=>onlineUsers.includes(member));
+                return(<ChatItem  avatar={avatar} name={name} key={index} chatId={_Id} sameSender={chatId==_Id} isOnline={isOnline} groupChat={groupChat} handleDeleteChat={handleDeleteChat} newMessage={newMessageAlert}/>)
             })
         }
     </Stack>
