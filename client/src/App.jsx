@@ -1,27 +1,29 @@
-import { useState } from 'react'
-import React,{lazy} from 'react';
-import {BrowserRouter,Routes,Route} from "react-router-dom"
+import {lazy, Suspense, useState} from 'react';
+import {BrowserRouter,Routes,Route} from "react-router-dom";
+import ProtectRoute from './Components/Auth/ProtectRoute';
+import { dividerClasses } from '@mui/material';
+import { LayoutLoader } from './Components/layout/Loaders';
 
 const Home = lazy(()=>import("./pages/Home"));
-
 const Login =lazy(()=>import("./pages/Login"));
-
 const Chat = lazy(()=>import("./pages/Chat"));
-
 const Group = lazy(()=>import("./pages/Group"));
+const NotFound = lazy(()=>import("./pages/NotFound"));
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
+    const [user,setUser] = useState(true);
   return (
     <BrowserRouter>
+      <Suspense fallback={<LayoutLoader/>} >
       <Routes>
-      <Route path='/' element= {<Home/>}/>
-      <Route path='/chat/:chatId' element= {<Chat/>}/>
-      <Route path='/group' element= {<Group/>}/>
-      <Route path='/login' element= {<Login/>}/>
+      <Route path='/' element= {<ProtectRoute user={user}><Home/></ProtectRoute>}/>
+      <Route path='/chat/:chatId' element= {<ProtectRoute user={user}><Chat/></ProtectRoute>}/>
+      <Route path='/group' element= {<ProtectRoute user={user}><Group/></ProtectRoute>}/>
+      <Route path='/login' element= {<ProtectRoute user={!user} redirect="/"><Login/></ProtectRoute>}/>
+      <Route path='*' element= {<NotFound/>}/>
       </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }

@@ -1,9 +1,9 @@
-import React,{useState} from "react";
 import {Container,Paper,Typography,TextField,Button,Stack,Avatar,IconButton}from "@mui/material";
 import {CameraAlt} from "@mui/icons-material"
 import VisuallyHiddenInput from "../styles/StyledComponents"
 import {usernameValidator,passwordValidator,nameValidator} from "../utils/Validator"
 import { useInputValidation,useFileHandler } from "../hooks/forms";
+import {useState} from "react";
 
 const Login = ()=>{
 
@@ -29,7 +29,6 @@ const Login = ()=>{
         }
     }
     >
-        
     <Paper
         elevation={3}
         sx={
@@ -77,7 +76,7 @@ const Login = ()=>{
                     marginTop:"1rem"
                 }
             }>
-                <Stack position={"relative  "} width={"10rem"} margin={"auto"} >
+                <Stack position={"relative"} width={"10rem"} margin={"auto"} >
                     
                 <Avatar src={avatar.preview} sx={
                     {

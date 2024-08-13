@@ -1,12 +1,14 @@
-import React from "react";
+import { Container } from "@mui/material";
+import AppLayout from "../Components/layout/AppLayout";
 
 const Home = ()=>{
     return(
         <>
-        <h1>Home</h1>
-        
+        <Container component={"main"} maxWidth="md">
+        <h1>chats from this to their</h1>
+        </Container>
         </>
     )
 }
 
-export default Home;
+export default AppLayout()(Home);
