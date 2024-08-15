@@ -12,7 +12,7 @@ const NotFound = lazy(()=>import("./pages/NotFound"));
 
 
 function App() {
-    const [user,setUser] = useState(true);
+    const [user,setUser] = useState(true    );
   return (
     <BrowserRouter>
       <Suspense fallback={<LayoutLoader/>} >

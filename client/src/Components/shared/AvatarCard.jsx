@@ -7,15 +7,16 @@ const AvatarCard = ({ avatar = [] ,max=4}) => {
             <AvatarGroup max={max}>
                 <Box width={"5rem"} height={"3rem"}>
                     {
+
                         avatar.map((url,index)=>{
-                            return <Avatar key={index} src={url} alt="avatar" style={{width:"3rem",height:"3rem",position:"absolute" ,left:{
-                                    xs:`${index+0.5}rem`,
+                            if(index>=max) return null;
+                            return <Avatar key={index} src={url} alt="avatar" sx={{width:"3rem",height:"3rem",position:"absolute" ,left:{
+                                    xs:`${0.5+index}rem`,
                                     sm:`${index}rem`,
                                 } }}/>
-                        });
+                        })
                     }
                 </Box>
-
             </AvatarGroup>
 
         </Stack>

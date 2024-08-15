@@ -1,4 +1,5 @@
-import { useState ,ChangeEvent } from "react";
+import { useState  } from "react";
+// import {ChangeEvent} from "react";
 
 const useFileHandler = (type, limitInMb = 5, maxFiles = 10) => {
     const initialFile = (type === "multiple" ? [] : null);
@@ -10,10 +11,8 @@ const useFileHandler = (type, limitInMb = 5, maxFiles = 10) => {
   
     const changeHandler = (e) => {
       if (!e.target.files) return;
-  
       if (type === "single") {
         const singleFile = e.target.files[0];
-  
         if (e.target.files.length > 1) {
           return setError("Cannot upload more than 1 file, please select type as 'Multiple'");
         }
