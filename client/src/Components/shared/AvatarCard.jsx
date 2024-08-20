@@ -1,4 +1,5 @@
 import {Avatar, AvatarGroup, Box, Stack} from "@mui/material";
+import {transformImage} from "../../lib/Features.js";
 
 const AvatarCard = ({ avatar = [] ,max=4}) => {
   return (
@@ -10,7 +11,7 @@ const AvatarCard = ({ avatar = [] ,max=4}) => {
 
                         avatar.map((url,index)=>{
                             if(index>=max) return null;
-                            return <Avatar key={index} src={url} alt="avatar" sx={{width:"3rem",height:"3rem",position:"absolute" ,left:{
+                            return <Avatar key={index} src={transformImage(url)} alt="avatar" sx={{width:"3rem",height:"3rem",position:"absolute" ,left:{
                                     xs:`${0.5+index}rem`,
                                     sm:`${index}rem`,
                                 } }}/>

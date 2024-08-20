@@ -9,70 +9,70 @@ export const chats = [
             "https://www.w3schools.com/howto/img_avatar2.png"
         ],
         name: "Tech Enthusiasts",
-        _Id: "1",
+        _id: "1",
         groupChat: true,
         members: ["1", "2", "3", "4", "5", "6"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
         name: "John Wick",
-        _Id: "2",
+        _id: "2",
         groupChat: false,
         members: ["1", "2"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar2.png"],
         name: "Jane Smith",
-        _Id: "3",
+        _id: "3",
         groupChat: false,
         members: ["3", "4"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
         name: "Developers Group",
-        _Id: "4",
+        _id: "4",
         groupChat: true,
         members: ["1", "2", "5"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar2.png"],
         name: "Mike Johnson",
-        _Id: "5",
+        _id: "5",
         groupChat: false,
         members: ["5", "6"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
         name: "Music Lovers",
-        _Id: "6",
+        _id: "6",
         groupChat: true,
         members: ["1", "2", "3", "4"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar2.png"],
         name: "Chris Brown",
-        _Id: "7",
+        _id: "7",
         groupChat: false,
         members: ["4", "5"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
         name: "Emily Davis",
-        _Id: "8",
+        _id: "8",
         groupChat: false,
         members: ["6", "1"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar2.png"],
         name: "Family Group",
-        _Id: "9",
+        _id: "9",
         groupChat: true,
         members: ["1", "2", "3", "4", "5"]
     },
     {
         avatar: ["https://www.w3schools.com/howto/img_avatar.png"],
         name: "Linda Wilson",
-        _Id: "10",
+        _id: "10",
         groupChat: false,
         members: ["1", "4"]
     }
@@ -175,3 +175,92 @@ export const notifications = [
     }
 ];
 
+export const messages = [
+    {
+        content: "Hey, how are you?",
+        _id: "msg1",
+        sender: {
+            _id: "1",
+            name: "John Doe",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:00:00.000Z",
+        attachments: [],
+    },
+    {
+        content: "I'm good, thanks! How about you?",
+        _id: "msg2",
+        sender: {
+            _id: "2",
+            name: "Jane Smith",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:01:00.000Z",
+        attachments: [],
+    },
+    {
+        content: "Doing well, just working on a project.",
+        _id: "msg3",
+        sender: {
+            _id: "1",
+            name: "John Doe",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:02:00.000Z",
+        attachments: [
+            {
+                url: "https://www.w3schools.com/howto/img_avatar.png",
+                public_id: "project_image_1",
+            },
+        ],
+    },
+    {
+        content: "That sounds interesting. What project is it?",
+        _id: "msg4",
+        sender: {
+            _id: "2",
+            name: "Jane Smith",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:03:00.000Z",
+        attachments: [],
+    },
+    {
+        content: "It's a chat application using React.",
+        _id: "msg5",
+        sender: {
+            _id: "1",
+            name: "John Doe",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:04:00.000Z",
+        attachments: [],
+    },
+    {
+        content: "Nice! Let me know if you need any help.",
+        _id: "msg6",
+        sender: {
+            _id: "2",
+            name: "Jane Smith",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:05:00.000Z",
+        attachments: [
+            {
+                url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                public_id: "help_image_1",
+            },
+        ],
+    },
+    {
+        content: "Will do, thanks!",
+        _id: "msg7",
+        sender: {
+            _id: "1",
+            name: "John Doe",
+        },
+        chat: "chatID1",
+        createdAt: "2023-10-01T10:06:00.000Z",
+        attachments: [],
+    },
+];
