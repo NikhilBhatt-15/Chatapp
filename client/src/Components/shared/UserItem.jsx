@@ -4,9 +4,9 @@ import {Add as AddIcon,Remove as RemoveIcon} from "@mui/icons-material";
 import {memo, useState} from "react";
 
 
-const UserItem = ({ user,handler,handlerIsLoading }) => {
+const UserItem = ({ user,handler,handlerIsLoading,isAdded=false }) => {
     const {name,_id,avatar} = user;
-    const [isSelect,setIsSelect] = useState(false);
+    const [isSelect,setIsSelect] = useState(isAdded);
     return (
         <ListItem>
             <Stack direction={"row"} alignItems={"center"} width={"100%"} spacing={"1rem"}>

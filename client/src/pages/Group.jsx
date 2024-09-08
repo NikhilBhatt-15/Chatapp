@@ -18,7 +18,6 @@ const Group = () => {
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [isAddMember, setIsAddMember] = useState(false);
     const chatId = useSearchParams()[0].getAll("group");
-
     const handleMobile =()=> {
         setIsMobile((prev) => !prev);
     }
@@ -58,7 +57,7 @@ const Group = () => {
                 <Stack direction={"column"} alignItems={"center"} spacing={"1rem"}>
                     {
                         users.map((user,index)=>(
-                            <UserItem key={index} user={user} handler={()=>{}}/>
+                            <UserItem key={index} user={user} handler={()=>{}} isAdded={true}/>
                         ))
                     }
                 </Stack>
@@ -154,22 +153,24 @@ const Group = () => {
             position: "relative",
             padding: "1rem 3rem",
         }}>
-            {Iconbtns}
-            {GroupName}
-            <Typography variant={"h6"} margin={"1rem"} alignSelf={"flex-start"}>Members</Typography>
-            <Stack maxWidth={"30rem"}
-                   width={"100%"}
-                   boxSizing={"border-box"}
-                   padding={{
-                       sm: "1rem", xs: "0", md: "1rem 4rem"
-                   }}
-                   spacing={"2rem"}
-                   bgcolor={"bisque"}
-                   height={"60vh"}
-                   overflow={"auto"}>
-                <MemberList/>
-            </Stack>
-            {ButtonGroup}
+             {Iconbtns}
+            {chatId.length?(<>
+                 {GroupName}
+                 <Typography variant={"h6"} margin={"1rem"} alignSelf={"flex-start"}>Members</Typography>
+                 <Stack maxWidth={"30rem"}
+                        width={"100%"}
+                        boxSizing={"border-box"}
+                        padding={{
+                            sm: "1rem", xs: "0", md: "1rem 4rem"
+                        }}
+                        spacing={"2rem"}
+                        bgcolor={"bisque"}
+                        height={"60vh"}
+                        overflow={"auto"}>
+                     <MemberList/>
+                 </Stack>
+                 {ButtonGroup}
+             </>):(<Typography variant={"h4"}>Select a group</Typography>)}
         </Grid>
         {
             isAddMember && <Suspense fallback={<div>Loading...</div>}>
