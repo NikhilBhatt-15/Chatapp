@@ -1,6 +1,6 @@
 import express from "express";
 import {auth} from "../middlewares/auth.js";
-import {createNewGroupChat, getMyChats} from "../controllers/chat.js";
+import {addMembers, createNewGroupChat, getMyChats, getMyGroups} from "../controllers/chat.js";
 
 
 
@@ -10,5 +10,7 @@ app.use(auth);
 
 app.post("/newgroup",createNewGroupChat);
 app.get("/mychats",getMyChats);
+app.get("/mygroups",getMyGroups);
+app.post("/addmember",addMembers);
 
 export default app;
