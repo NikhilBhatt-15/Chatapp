@@ -15,7 +15,7 @@ const schema = new Schema({
     },
     members:[{
         type:Types.ObjectId,
-        ref:'User'
+        ref:'User',
     }],
 
 },{

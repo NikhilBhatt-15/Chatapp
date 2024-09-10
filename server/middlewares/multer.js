@@ -6,8 +6,5 @@ export const upload = multer({
     },
 })
 
-export const singleUpload = multer({
-    limits:{
-        fileSize:1024*1024*5
-    },
-}).single('avatar');
+export const singleUpload =upload.single('avatar');
+export const attachmentsUpload = upload.array('files',10);
