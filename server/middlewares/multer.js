@@ -1,8 +1,14 @@
 import multer from 'multer';
 
+// files size limit is 5mb
+
+
+
+
+
 export const upload = multer({
     limits:{
-        fileSize:1024*1024*5
+        fileSize:1024*1024*100
     },
 })
 

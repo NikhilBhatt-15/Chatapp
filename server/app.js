@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 import {connectDB} from "./utils/features.js";
 import {errorMiddleware} from "./middlewares/error.js";
 import cookieParser from "cookie-parser";
+// import bodyparser from "body-parser";
 import {createUser} from "./seeders/user.js";
+import bodyParser from "body-parser";
 dotenv.config({
     path:"./.env"
 })
@@ -17,6 +19,7 @@ connectDB(MongoUri);
 
 
 // createUser(10);
+app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cookieParser());
 

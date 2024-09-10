@@ -22,9 +22,10 @@ app.get("/mygroups",getMyGroups);
 app.put("/addmember",addMembers);
 app.delete("/removemember",removeMembers);
 app.delete("/leave/:chatId",leaveGroup);
-app.put("/rename/:chatId",rename);
-app.delete("/delete/:chatId",deleteChat);
-app.get("/:chatId",getChatDetails);
-app.get("/messages/:chatId",getMessages);
+// app.get("/messages/:chatId",getMessages);
 app.post("/message",attachmentsUpload,sendAttachment);
+
+
+
+app.route("/:chatId").get(getChatDetails).put(rename).delete(deleteChat);
 export default app;

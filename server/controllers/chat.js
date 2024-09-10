@@ -4,7 +4,7 @@ import {ErrorHandler} from "../utils/utility.js";
 import {Chat} from "../models/chat.js";
 import {User} from "../models/user.js";
 import {emitEvent} from "../utils/features.js";
-import {ALERT, REFETCH_CHATS} from "../constants/events.js";
+import {ALERT, NEW_ATTACHMENT, NEW_MESSAGE_ALERT, REFETCH_CHATS} from "../constants/events.js";
 import {Message} from "../models/message.js";
 
 const createNewGroupChat =TryCatch(async (req,res,next)=>{
@@ -198,6 +198,9 @@ const rename = TryCatch(async (req,res,next)=>{
     if(!chat){
         return next(new ErrorHandler("Chat not found",404));
     }
+    if(!chat.groupChat){
+        return next(new ErrorHandler("This is not a group chat",400));
+    }
     if(chat.creator.toString()!==req.user.id.toString()){
         return next(new ErrorHandler("You are not the creator of this group chat",400));
     }
@@ -238,14 +241,35 @@ const deleteChat = TryCatch(async(req,res,next)=>{
 
 const getChatDetails = TryCatch(async(req,res,next)=>{
     const chatId = req.params.chatId;
-    const chat = await Chat.findById(chatId).populate("members","name avatar");
-    if(!chat){
-        return next(new ErrorHandler("Chat not found",404));
+    console.log(req.query.populate);
+    if(req.query.populate==="true"){
+
+        const chat = await Chat.findById(chatId).populate("members","name avatar").lean();
+        if(!chat){
+            return next(new ErrorHandler("Chat not found",404));
+        }
+        chat.members = chat.members.map((member)=> {
+            return {
+                _id:member._id,
+                name:member.name,
+                avatar:member.avatar.url
+            }
+        });
+        return res.status(200).json({
+            success:true,
+            chat
+        });
     }
-    res.status(200).json({
-        success:true,
-        chat
-    });
+    else{
+        const chat = await Chat.findById(chatId);
+        if(!chat){
+            return next(new ErrorHandler("Chat not found",404));
+        }
+        return res.status(200).json({
+            success:true,
+            chat
+        });
+    }
 });
 
 const getMessages = TryCatch(async(req,res,next)=>{
@@ -262,17 +286,48 @@ const getMessages = TryCatch(async(req,res,next)=>{
 });
 
 const sendAttachment =TryCatch(async(req,res,next)=>{
-    const {chatId,content} = req.body;
+    const chatId = req.body.chatId;
+    const files = req.files;
     const chat = await Chat.findById(chatId);
     if(!chat){
         return next(new ErrorHandler("Chat not found",404));
     }
-    if(!content){
+    if(!files || files.length<1){
         return next(new ErrorHandler("Content is required",400));
     }
-    if(content.length>20){
-        return next(new ErrorHandler("Content cannot exceed 20 files",400));
+
+     // upload files to cloudinary
+    const attachments = [];
+
+    const messageForRealTime={
+         content:"",
+         attachments,
+         sender:{
+                _id:req.user.id,
+                name:req.user.name,
+                avatar:req.user.avatar.url
+         },
+         chat:chatId,
+     };
+    emitEvent(req,NEW_ATTACHMENT,chat.members,{
+        message:messageForRealTime,
+        chatId,
+    })
+    emitEvent(req,NEW_MESSAGE_ALERT,chat.members, {chatId});
+
+
+    const messageForDb = {
+        sender:req.user.id,
+        chat:chatId,
+        content:"",
+        attachment:attachments
     }
+    const newMessage = await Message.create(messageForDb);
+
+    res.status(201).json({
+        success:true,
+        message:newMessage
+    });
 
 });
 
